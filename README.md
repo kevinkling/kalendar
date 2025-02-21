@@ -6,12 +6,18 @@
 
 - Uso:
     - Breeze para login (blade, Pest:testin) https://www.youtube.com/watch?v=3hRkE64YIqg&ab_channel=ElRinc%C3%B3ndeIsma
+    - fullcalendar : pnpm add @fullcalendar/core @fullcalendar/daygrid @fullcalendar/interaction https://fullcalendar.io/
 
 
 - Para un futuro :
     - Usar el verificador de email (MustVerifyEmail)
+    - Planitllas (PHP)
 
 
+- Cosas que hice :
+    - instale breeze
+    - instale fullcalendar, personalice su estilo y separe en archivos algunas cosas
+    
 
-
+kevin@gmail.com
 Pass: kevin1234
