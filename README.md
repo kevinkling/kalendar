@@ -1,0 +1,17 @@
+- Pasos qu ehice para instalar
+    - pnpm install
+    - cp .env.example .env (No lo hice porque ya lo tenia)
+    - php artisan key:generate
+
+
+- Uso:
+    - Breeze para login (blade, Pest:testin) https://www.youtube.com/watch?v=3hRkE64YIqg&ab_channel=ElRinc%C3%B3ndeIsma
+
+
+- Para un futuro :
+    - Usar el verificador de email (MustVerifyEmail)
+
+
+
+
+Pass: kevin1234
