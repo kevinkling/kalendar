@@ -108,5 +108,16 @@ RUN ls -la /var/www/html/database/migrations
 # Verificar si la base de datos fue creada correctamente
 RUN if [ -f /var/www/html/database/database.sqlite ]; then echo "Database exists"; else echo "Database does not exist"; fi
 
-# Mostrar el contenido del archivo .env (en la ruta que corresponde a tu proyecto Laravel)
-RUN echo $APP_ENV
+
+# Verfifico los archivos generados por Vite en public/build
+RUN echo "📂 Listando archivos en public/build:" && ls -l /var/www/html/public/build
+# Mostrar permisos y propietarios de la carpeta public/build
+RUN echo "🔒 Permisos y propietarios de public/build:" && ls -ld /var/www/html/public/build
+RUN echo "🔒 Permisos de los archivos dentro de public/build:" && ls -l /var/www/html/public/build
+# Buscar archivos CSS y JS para confirmar que se generaron correctamente
+RUN echo "📦 Archivos CSS y JS encontrados:" && find /var/www/html/public/build -type f \( -name "*.css" -o -name "*.js" \)
+# Mostrar las primeras líneas de vite.config.js
+RUN echo "⚙️ Contenido de vite.config.js:" && head -n 20 /var/www/html/vite.config.js
+# Mostrar las variables de entorno relacionadas con Vite
+RUN echo "🌐 APP_URL:" && echo $APP_URL
+RUN echo "🌐 VITE_APP_URL:" && echo $VITE_APP_URL
