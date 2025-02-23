@@ -40,9 +40,12 @@ RUN php artisan migrate:status
 
 
 # Verificar tablas en SQLite
+RUN ls -l /opt/render/storage/database.sqlite
 RUN sqlite3 /opt/render/storage/database.sqlite ".tables"
+RUN echo "Verificando tablas SQLite..." && sqlite3 /opt/render/storage/database.sqlite ".tables"
+RUN php artisan --env=local db:show-config
+RUN php artisan tinker --eval "dd(DB::getConfig())"
 
-RUN php artisan tinker -e "dd(DB::getConfig())"
 
 
 # Habilitamos mod_rewrite para URLs amigables en Laravel
