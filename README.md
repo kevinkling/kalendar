@@ -7,6 +7,7 @@
 - Uso:
     - Breeze para login (blade, Pest:testin) https://www.youtube.com/watch?v=3hRkE64YIqg&ab_channel=ElRinc%C3%B3ndeIsma
     - fullcalendar : pnpm add @fullcalendar/core @fullcalendar/daygrid @fullcalendar/interaction https://fullcalendar.io/
+    axios para los metoso post
 
 
 - Para un futuro :

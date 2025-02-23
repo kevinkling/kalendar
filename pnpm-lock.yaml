@@ -37,7 +37,7 @@ importers:
         specifier: ^10.4.2
         version: 10.4.20(postcss@8.5.3)
       axios:
-        specifier: ^1.7.4
+        specifier: ^1.7.9
         version: 1.7.9
       concurrently:
         specifier: ^9.0.1
