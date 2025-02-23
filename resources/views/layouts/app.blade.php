@@ -12,8 +12,9 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-    <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <script src="{{ asset('js/app.js') }}"></script>
+
 
     <!-- FullCalendar -->
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
@@ -23,6 +24,7 @@
         const base_url = window.location.href;
     </script>
 </head>
+
 <body class="font-sans antialiased">
     <div class="min-h-screen bg-gray-100 dark:bg-gray-500">
         @include('layouts.navigation')
@@ -42,4 +44,5 @@
         </main>
     </div>
 </body>
+
 </html>
