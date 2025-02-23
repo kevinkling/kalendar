@@ -97,6 +97,11 @@ RUN php artisan migrate:status
 # Verificar la versión de Laravel
 RUN php artisan --version
 
+# Mover el manifest.json desde .vite a public/build
+RUN mv /var/www/html/public/build/.vite/manifest.json /var/www/html/public/build/
+
+#### VERIFICACION
+
 # Verificar las tablas en la base de datos SQLite
 RUN echo "Verificando tablas SQLite..." && sqlite3 /var/www/html/database/database.sqlite ".tables"
 RUN echo "Contenido de la base de datos:" && sqlite3 /var/www/html/database/database.sqlite "SELECT name FROM sqlite_master WHERE type='table';"
