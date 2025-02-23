@@ -48,6 +48,9 @@ RUN chmod -R 775 storage bootstrap/cache public
 # Creamos la base de datos si no existe
 RUN mkdir -p /opt/render/storage && touch /opt/render/storage/database.sqlite
 
+# Generamos la migración de la tabla sessions
+RUN php artisan session:table
+
 # Ejecutamos las migraciones de Laravel
 RUN php artisan migrate --force
 
