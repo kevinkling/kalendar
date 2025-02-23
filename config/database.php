@@ -84,18 +84,18 @@ return [
 
         'pgsql' => [
             'driver' => 'pgsql',
-            'url' => env('DB_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'laravel'),
-            'username' => env('DB_USERNAME', 'root'),
-            'password' => env('DB_PASSWORD', ''),
-            'charset' => env('DB_CHARSET', 'utf8'),
+            'host' => env('DB_HOST', '127.0.0.1'), // Utiliza tu DB_HOST
+            'port' => env('DB_PORT', '5432'), // El puerto es por defecto 5432
+            'database' => env('DB_DATABASE', 'kalendar_prod'), // El nombre de tu base de datos
+            'username' => env('DB_USERNAME', 'kalendar_prod_user'), // El usuario
+            'password' => env('DB_PASSWORD', 'yQ7U6fdAXEnb21s22XmWjDYLGXpKG4v0'), // La contraseña
+            'charset' => env('DB_CHARSET', 'utf8'), // El charset (utf8 generalmente)
             'prefix' => '',
             'prefix_indexes' => true,
             'search_path' => 'public',
-            'sslmode' => 'prefer',
+            'sslmode' => 'prefer', // Es importante para la conexión segura con PostgreSQL
         ],
+
 
         'sqlsrv' => [
             'driver' => 'sqlsrv',
@@ -147,7 +147,7 @@ return [
 
         'options' => [
             'cluster' => env('REDIS_CLUSTER', 'redis'),
-            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_database_'),
+            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_') . '_database_'),
         ],
 
         'default' => [
