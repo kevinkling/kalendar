@@ -110,3 +110,6 @@ RUN ls -la /var/www/html/database/migrations
 
 # Verificar si la base de datos fue creada correctamente
 RUN if [ -f /opt/render/storage/database.sqlite ]; then echo "Database exists"; else echo "Database does not exist"; fi
+
+# Mostrar el contenido del archivo .env (en la ruta que corresponde a tu proyecto Laravel)
+RUN cat /var/www/html/.env
