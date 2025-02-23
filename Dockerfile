@@ -38,8 +38,6 @@ RUN php artisan migrate --force
 # Verifica si las migraciones pendientes
 RUN php artisan migrate:status
 
-# Crear una ruta temporal para verificar el esquema de la base de datos
-RUN php -r 'echo json_encode(DB::select("SELECT name FROM sqlite_master WHERE type=\'table\';"));'
 
 # Verificar tablas en SQLite
 RUN sqlite3 /opt/render/storage/database.sqlite ".tables"
