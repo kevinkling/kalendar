@@ -36,10 +36,8 @@ RUN mkdir -p /var/www/html/database && touch /var/www/html/database/database.sql
 RUN chown -R www-data:www-data /var/www/html/database
 RUN chmod -R 775 /var/www/html/database
 
-
-
 # Verifica si el archivo de base de datos existe antes de migrar
-RUN if [ ! -f /opt/render/storage/database.sqlite ]; then echo "Database does not exist"; fi
+RUN if [ ! -f /var/www/html/database/database.sqlite ]; then echo "Database does not exist"; fi
 
 # Ejecuta las migraciones de Laravel (con --force si es necesario)
 RUN php artisan migrate --force
@@ -48,15 +46,12 @@ RUN php artisan migrate --force
 RUN php artisan migrate:status
 
 # Verifica las tablas en la base de datos
-RUN echo "Verificando tablas SQLite..." && sqlite3 /opt/render/storage/database.sqlite ".tables"
-RUN echo "Contenido de la base de datos:" && sqlite3 /opt/render/storage/database.sqlite "SELECT name FROM sqlite_master WHERE type='table';"
+RUN echo "Verificando tablas SQLite..." && sqlite3 /var/www/html/database/database.sqlite ".tables"
+RUN echo "Contenido de la base de datos:" && sqlite3 /var/www/html/database/database.sqlite "SELECT name FROM sqlite_master WHERE type='table';"
 
 # Verifica la estructura del directorio
-RUN ls -l /opt/render/storage
+RUN ls -l /var/www/html/database
 RUN ls -l /var/www/html/database/migrations
-
-
-
 
 # Habilitamos mod_rewrite para URLs amigables en Laravel
 RUN a2enmod rewrite
@@ -103,15 +98,15 @@ RUN php artisan migrate:status
 RUN php artisan --version
 
 # Verificar las tablas en la base de datos SQLite
-RUN echo "Verificando tablas SQLite..." && sqlite3 /opt/render/storage/database.sqlite ".tables"
-RUN echo "Contenido de la base de datos:" && sqlite3 /opt/render/storage/database.sqlite "SELECT name FROM sqlite_master WHERE type='table';"
+RUN echo "Verificando tablas SQLite..." && sqlite3 /var/www/html/database/database.sqlite ".tables"
+RUN echo "Contenido de la base de datos:" && sqlite3 /var/www/html/database/database.sqlite "SELECT name FROM sqlite_master WHERE type='table';"
 
 # Verificar los archivos en el directorio de almacenamiento
-RUN ls -la /opt/render/storage
+RUN ls -la /var/www/html/database
 RUN ls -la /var/www/html/database/migrations
 
 # Verificar si la base de datos fue creada correctamente
-RUN if [ -f /opt/render/storage/database.sqlite ]; then echo "Database exists"; else echo "Database does not exist"; fi
+RUN if [ -f /var/www/html/database/database.sqlite ]; then echo "Database exists"; else echo "Database does not exist"; fi
 
 # Mostrar el contenido del archivo .env (en la ruta que corresponde a tu proyecto Laravel)
 RUN echo $APP_ENV
