@@ -29,6 +29,12 @@ RUN composer install --no-dev --optimize-autoloader
 # Instalamos las dependencias de frontend con pnpm
 RUN pnpm install && pnpm run build
 
+# Creamos la base de datos SQLite si no existe
+RUN mkdir -p /opt/render/storage && touch /opt/render/storage/database.sqlite
+
+# Ejecutamos las migraciones de Laravel (incluyendo la de sesiones)
+RUN php artisan migrate --force
+
 # Habilitamos mod_rewrite para URLs amigables en Laravel
 RUN a2enmod rewrite
 
@@ -44,15 +50,6 @@ RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 # Configuramos los permisos para Laravel
 RUN chown -R www-data:www-data storage bootstrap/cache public
 RUN chmod -R 775 storage bootstrap/cache public
-
-# Creamos la base de datos si no existe
-RUN mkdir -p /opt/render/storage && touch /opt/render/storage/database.sqlite
-
-# Generamos la migración de la tabla sessions
-RUN php artisan session:table
-
-# Ejecutamos las migraciones de Laravel
-RUN php artisan migrate --force
 
 # Exponemos el puerto 80
 EXPOSE 80

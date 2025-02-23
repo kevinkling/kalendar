@@ -32,4 +32,30 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+
+Route::get('/check-db', function () {
+    // Obtener las tablas de la base de datos
+    $tables = DB::select('SELECT name FROM sqlite_master WHERE type="table"');
+
+    // Verificar si la tabla sessions existe
+    $sessionsExists = in_array('sessions', array_column($tables, 'name'));
+
+    // Obtener el contenido de la tabla sessions
+    $sessions = $sessionsExists ? DB::table('sessions')->get() : 'La tabla sessions no existe';
+
+    // Obtener el estado de las migraciones
+    $migrations = DB::table('migrations')->get();
+
+    return response()->json([
+        'tables' => $tables, // Listado de todas las tablas
+        'sessions_exists' => $sessionsExists, // Si la tabla sessions existe
+        'sessions_data' => $sessions, // Datos de la tabla sessions
+        'migrations' => $migrations, // Información de las migraciones
+    ]);
+});
+
+
 require __DIR__.'/auth.php';
