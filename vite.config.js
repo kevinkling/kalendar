@@ -12,6 +12,7 @@ export default defineConfig({
     build: {
         outDir: 'public/build', // Genera el build en esta carpeta
         manifest: true,         // Genera manifest.json
-        emptyOutDir: true       // Limpia el directorio antes de construir
+        emptyOutDir: true,      // Limpia el directorio antes de construir
+        base: '/build/',        // Asegúrate de que las rutas estén configuradas correctamente
     }
 });
