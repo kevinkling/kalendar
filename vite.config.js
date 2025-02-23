@@ -6,11 +6,12 @@ export default defineConfig({
         laravel({
             input: ['resources/css/app.css', 'resources/js/app.js'],
             refresh: true,
-            publicDirectory: 'public', // 👈 Añade esto
+            buildDirectory: 'build',
         }),
     ],
     build: {
-        outDir: 'public/build', // Asegura que Vite genere en /public/build
-        manifest: true,
-    },
+        outDir: 'public/build', // Genera el build en esta carpeta
+        manifest: true,         // Genera manifest.json
+        emptyOutDir: true       // Limpia el directorio antes de construir
+    }
 });
