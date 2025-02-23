@@ -29,11 +29,13 @@ RUN composer install --no-dev --optimize-autoloader
 # Instalamos las dependencias de frontend con pnpm
 RUN pnpm install && pnpm run build
 
-# Creamos la base de datos SQLite si no existe
-RUN mkdir -p /opt/render/storage && touch /opt/render/storage/database.sqlite
+# Crear el directorio para la base de datos SQLite
+RUN mkdir -p /var/www/html/database && touch /var/www/html/database/database.sqlite
 
-RUN chown -R www-data:www-data /opt/render/storage
-RUN chmod -R 777 /opt/render/storage
+# Establecer los permisos adecuados para el directorio y la base de datos
+RUN chown -R www-data:www-data /var/www/html/database
+RUN chmod -R 775 /var/www/html/database
+
 
 
 # Verifica si el archivo de base de datos existe antes de migrar
