@@ -33,7 +33,7 @@ RUN pnpm install && pnpm run build
 RUN mkdir -p /opt/render/storage && touch /opt/render/storage/database.sqlite
 
 RUN chown -R www-data:www-data /opt/render/storage
-RUN chmod -R 775 /opt/render/storage
+RUN chmod -R 777 /opt/render/storage
 
 
 # Ejecutamos las migraciones de Laravel (incluyendo la de sesiones)
