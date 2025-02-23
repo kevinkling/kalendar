@@ -39,6 +39,12 @@ RUN php artisan migrate --force
 RUN php artisan migrate:status
 
 
+# Verificar si la base de datos fue creada
+RUN if [ -f /opt/render/storage/database.sqlite ]; then echo "Database exists"; else echo "Database does not exist"; fi
+# Verificar tablas en la base de datos
+RUN sqlite3 /opt/render/storage/database.sqlite "SELECT name FROM sqlite_master WHERE type='table';"
+
+
 # Verificar tablas en SQLite
 RUN ls -l /opt/render/storage/database.sqlite
 RUN sqlite3 /opt/render/storage/database.sqlite ".tables"
