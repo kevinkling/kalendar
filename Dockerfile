@@ -45,11 +45,14 @@ RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 RUN chown -R www-data:www-data storage bootstrap/cache public
 RUN chmod -R 775 storage bootstrap/cache public
 
-# Exponemos el puerto 80
-EXPOSE 80
-
 # Creamos la base de datos si no existe
 RUN mkdir -p /opt/render/storage && touch /opt/render/storage/database.sqlite
+
+# Ejecutamos las migraciones de Laravel
+RUN php artisan migrate --force
+
+# Exponemos el puerto 80
+EXPOSE 80
 
 # Iniciamos Apache
 CMD ["apache2-foreground"]
