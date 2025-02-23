@@ -32,6 +32,10 @@ RUN pnpm install && pnpm run build
 # Creamos la base de datos SQLite si no existe
 RUN mkdir -p /opt/render/storage && touch /opt/render/storage/database.sqlite
 
+RUN chown -R www-data:www-data /opt/render/storage
+RUN chmod -R 775 /opt/render/storage
+
+
 # Ejecutamos las migraciones de Laravel (incluyendo la de sesiones)
 RUN php artisan migrate --force
 
@@ -49,8 +53,6 @@ RUN sqlite3 /opt/render/storage/database.sqlite "SELECT name FROM sqlite_master 
 RUN ls -l /opt/render/storage/database.sqlite
 RUN sqlite3 /opt/render/storage/database.sqlite ".tables"
 RUN echo "Verificando tablas SQLite..." && sqlite3 /opt/render/storage/database.sqlite ".tables"
-RUN php artisan --env=local db:show-config
-RUN php artisan tinker --eval "dd(DB::getConfig())"
 
 
 
