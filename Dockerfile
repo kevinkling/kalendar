@@ -4,6 +4,11 @@ FROM php:8.2-apache
 # Establecemos el directorio de trabajo dentro del contenedor
 WORKDIR /var/www/html
 
+# Probar conexión a PostgreSQL
+RUN apt-get update && apt-get install -y postgresql-client && \
+    pg_isready -h ${DB_HOST} -U ${DB_USERNAME} -d ${DB_DATABASE} || echo "PostgreSQL connection failed"
+
+
 # Instalamos dependencias del sistema necesarias para PostgreSQL, Composer y Node.js
 RUN apt-get update && apt-get install -y \
     git unzip curl \
