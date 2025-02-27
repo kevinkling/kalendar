@@ -1,6 +1,7 @@
 # Usamos una imagen oficial de PHP con Apache
 FROM php:8.2-apache
 
+# Variables de entorno para conexión a la base de datos
 ENV DB_CONNECTION=pgsql
 ENV DB_HOST=dpg-cutqua5ds78s7392lra0-a.oregon-postgres.render.com
 ENV DB_PORT=5432
@@ -10,11 +11,6 @@ ENV DB_PASSWORD=yQ7U6fdAXEnb21s22XmWjDYLGXpKG4v0
 
 # Establecemos el directorio de trabajo dentro del contenedor
 WORKDIR /var/www/html
-
-# Probar conexión a PostgreSQL
-RUN apt-get update && apt-get install -y postgresql-client && \
-    pg_isready -h ${DB_HOST} -U ${DB_USERNAME} -d ${DB_DATABASE} || echo "PostgreSQL connection failed"
-
 
 # Instalamos dependencias del sistema necesarias para PostgreSQL, Composer y Node.js
 RUN apt-get update && apt-get install -y \
@@ -52,18 +48,21 @@ RUN sed -i 's|/var/www/html|/var/www/html/public|' /etc/apache2/sites-available/
 # Configuramos DirectoryIndex para reconocer index.php
 RUN echo "DirectoryIndex index.php" >> /etc/apache2/apache2.conf
 
-# Creamos el archivo .env y configuramos permisos
-RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
-
 # Configuramos los permisos para Laravel
 RUN chown -R www-data:www-data storage bootstrap/cache public
 RUN chmod -R 775 storage bootstrap/cache public
 
+# Verificar la conexión a la base de datos PostgreSQL desde el Dockerfile
+RUN apt-get update && apt-get install -y postgresql-client && \
+    pg_isready -h ${DB_HOST} -U ${DB_USERNAME} -d ${DB_DATABASE} && \
+    echo "Conexión exitosa a la base de datos PostgreSQL" || echo "Conexión fallida a la base de datos PostgreSQL"
+
+
+# Ejecutar migraciones antes de iniciar Apache
+RUN php artisan migrate --force
+
 # Exponemos el puerto 80
 EXPOSE 80
-
-# Iniciar el contenedor y ejecutar migraciones antes de arrancar Apache
-CMD echo "Migraciones.." >> php artisan migrate --force
 
 # Iniciamos Apache
 CMD ["apache2-foreground"]
@@ -75,7 +74,6 @@ RUN composer --version
 
 # Verificar las extensiones de PHP necesarias para PostgreSQL
 RUN php -m | grep -E 'pdo|pgsql'
-
 
 # Verificar el estado de las migraciones de Laravel
 RUN php artisan migrate:status
