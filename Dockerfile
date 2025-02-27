@@ -39,7 +39,12 @@ RUN composer install --no-dev --optimize-autoloader
 RUN export NODE_ENV=production
 # Instalamos las dependencias de frontend con pnpm
 RUN pnpm install && pnpm run build
-RUN echo "Contenido de public/build después de Vite:" && ls -l /var/www/html/public/build
+RUN echo "📦 Ejecutando build con Vite..."
+RUN pnpm run build
+
+RUN echo "📂 Verificando archivos en public/build:" && ls -la /var/www/html/public/build
+RUN if [ -f /var/www/html/public/build/manifest.json ]; then echo "✅ Vite manifest encontrado"; else echo "❌ Vite manifest NO encontrado" && exit 1; fi
+
 
 
 # Habilitamos mod_rewrite para URLs amigables en Laravel

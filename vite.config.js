@@ -10,9 +10,12 @@ export default defineConfig({
         }),
     ],
     build: {
-        outDir: 'public/build', // Genera el build en esta carpeta
-        manifest: true,         // Genera manifest.json
-        emptyOutDir: true,      // Limpia el directorio antes de construir
-        base: '/build/',        // Asegúrate de que las rutas estén configuradas correctamente
+        outDir: 'public/build',
+        manifest: true,
+        emptyOutDir: true,
+        base: '/build/',
+    },
+    define: {
+        'process.env.NODE_ENV': '"production"' // 🔑 Esta línea es la que falta
     }
 });
