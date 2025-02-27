@@ -36,8 +36,11 @@ COPY . .
 # Instalamos las dependencias de Composer
 RUN composer install --no-dev --optimize-autoloader
 
+RUN export NODE_ENV=production
 # Instalamos las dependencias de frontend con pnpm
 RUN pnpm install && pnpm run build
+RUN echo "Contenido de public/build después de Vite:" && ls -l /var/www/html/public/build
+
 
 # Habilitamos mod_rewrite para URLs amigables en Laravel
 RUN a2enmod rewrite
