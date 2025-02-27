@@ -60,7 +60,8 @@ RUN apt-get update && apt-get install -y postgresql-client && \
 
 # Ejecutar migraciones antes de iniciar Apache
 # RUN php artisan migrate --force
-RUN php artisan migrate:refresh
+php artisan migrate:refresh --force
+
 
 
 # Exponemos el puerto 80
