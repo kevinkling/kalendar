@@ -60,8 +60,8 @@ RUN apt-get update && apt-get install -y postgresql-client && \
 
 # Ejecutar migraciones antes de iniciar Apache
 # RUN php artisan migrate --force
-RUN php artisan migrate --force
-
+RUN php artisan optimize:clear
+RUN php artisan config:cache
 
 # Exponemos el puerto 80
 EXPOSE 80
@@ -82,3 +82,5 @@ RUN php artisan migrate:status
 
 # Verificar los archivos generados por Vite en public/build
 RUN echo "📂 Verificando archivos en public/build:" && ls -l /var/www/html/public/build
+
+RUN echo "Vite manifest existe?" && ls -l /var/www/html/public/build/manifest.json
