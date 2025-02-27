@@ -41,7 +41,7 @@ RUN export NODE_ENV=production
 RUN pnpm install && pnpm run build
 RUN echo "📦 Ejecutando build con Vite..."
 RUN pnpm run build
-RUN mv /var/www/html/public/.vite/manifest.json /var/www/html/public/build/manifest.json
+RUN mv /var/www/html/public/build/.vite/manifest.json /var/www/html/public/build/manifest.json
 
 
 RUN echo "📂 Verificando archivos en public/build:" && ls -la /var/www/html/public/build
