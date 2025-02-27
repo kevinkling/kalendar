@@ -71,3 +71,5 @@ RUN php artisan migrate:status
 
 # Verificar los archivos generados por Vite en public/build
 RUN echo "📂 Verificando archivos en public/build:" && ls -l /var/www/html/public/build
+
+RUN php -r "require __DIR__.'/vendor/autoload.php'; \$app = require_once __DIR__.'/bootstrap/app.php'; \DB::connection()->getPdo(); echo 'Conexión exitosa a la base de datos.';"

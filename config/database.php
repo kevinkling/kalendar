@@ -84,16 +84,16 @@ return [
 
         'pgsql' => [
             'driver' => 'pgsql',
-            'host' => env('DB_HOST', '127.0.0.1'), // Utiliza tu DB_HOST
-            'port' => env('DB_PORT', '5432'), // El puerto es por defecto 5432
-            'database' => env('DB_DATABASE', 'kalendar_prod'), // El nombre de tu base de datos
-            'username' => env('DB_USERNAME', 'kalendar_prod_user'), // El usuario
-            'password' => env('DB_PASSWORD', 'yQ7U6fdAXEnb21s22XmWjDYLGXpKG4v0'), // La contraseña
+            'host' => env('DB_HOST', '127.0.0.1'), // Utiliza tu DB_HOST (puedes definirlo en .env)
+            'port' => env('DB_PORT', '5432'), // El puerto por defecto de PostgreSQL
+            'database' => env('DB_DATABASE', 'kalendar'), // El nombre de la base de datos (en .env para cada entorno)
+            'username' => env('DB_USERNAME', 'kalendar_user'), // El usuario de la base de datos (definido en .env)
+            'password' => env('DB_PASSWORD', 'root'), // La contraseña (definida en .env)
             'charset' => env('DB_CHARSET', 'utf8'), // El charset (utf8 generalmente)
             'prefix' => '',
             'prefix_indexes' => true,
             'search_path' => 'public',
-            'sslmode' => 'prefer', // Es importante para la conexión segura con PostgreSQL
+            'sslmode' => env('DB_SSLMODE', 'prefer'), // Puedes definir el SSL en .env para producción
         ],
 
 
