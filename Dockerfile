@@ -62,6 +62,9 @@ RUN chmod -R 775 storage bootstrap/cache public
 # Exponemos el puerto 80
 EXPOSE 80
 
+# Iniciar el contenedor y ejecutar migraciones antes de arrancar Apache
+CMD php artisan migrate --force && apache2-foreground
+
 # Iniciamos Apache
 CMD ["apache2-foreground"]
 
