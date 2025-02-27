@@ -1,3 +1,11 @@
+ENV DB_CONNECTION=pgsql
+ENV DB_HOST=dpg-cutqua5ds78s7392lra0-a.oregon-postgres.render.com
+ENV DB_PORT=5432
+ENV DB_DATABASE=kalendar_prod
+ENV DB_USERNAME=kalendar_prod_user
+ENV DB_PASSWORD=yQ7U6fdAXEnb21s22XmWjDYLGXpKG4v0
+
+
 # Usamos una imagen oficial de PHP con Apache
 FROM php:8.2-apache
 
@@ -65,9 +73,6 @@ RUN composer --version
 
 # Verificar las extensiones de PHP necesarias para PostgreSQL
 RUN php -m | grep -E 'pdo|pgsql'
-
-
-RUN php -r "require __DIR__.'/vendor/autoload.php'; \$app = require_once __DIR__.'/bootstrap/app.php'; \DB::connection()->getPdo(); echo 'Conexión exitosa a la base de datos.';"
 
 
 # Verificar el estado de las migraciones de Laravel

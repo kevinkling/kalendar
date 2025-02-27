@@ -92,7 +92,7 @@ return [
             'charset' => env('DB_CHARSET', 'utf8'), // El charset (utf8 generalmente)
             'prefix' => '',
             'prefix_indexes' => true,
-            'search_path' => 'public',
+            'search_path' => env('DB_SCHEMA', 'public'),
             'sslmode' => env('DB_SSLMODE', 'prefer'), // Puedes definir el SSL en .env para producción
         ],
 
