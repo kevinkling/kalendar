@@ -41,6 +41,8 @@ RUN export NODE_ENV=production
 RUN pnpm install && pnpm run build
 RUN echo "📦 Ejecutando build con Vite..."
 RUN pnpm run build
+RUN mv /var/www/html/public/.vite/manifest.json /var/www/html/public/build/manifest.json
+
 
 RUN echo "📂 Verificando archivos en public/build:" && ls -la /var/www/html/public/build
 RUN if [ -f /var/www/html/public/build/manifest.json ]; then echo "✅ Vite manifest encontrado"; else echo "❌ Vite manifest NO encontrado" && exit 1; fi
