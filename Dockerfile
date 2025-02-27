@@ -1,13 +1,12 @@
+# Usamos una imagen oficial de PHP con Apache
+FROM php:8.2-apache
+
 ENV DB_CONNECTION=pgsql
 ENV DB_HOST=dpg-cutqua5ds78s7392lra0-a.oregon-postgres.render.com
 ENV DB_PORT=5432
 ENV DB_DATABASE=kalendar_prod
 ENV DB_USERNAME=kalendar_prod_user
 ENV DB_PASSWORD=yQ7U6fdAXEnb21s22XmWjDYLGXpKG4v0
-
-
-# Usamos una imagen oficial de PHP con Apache
-FROM php:8.2-apache
 
 # Establecemos el directorio de trabajo dentro del contenedor
 WORKDIR /var/www/html
