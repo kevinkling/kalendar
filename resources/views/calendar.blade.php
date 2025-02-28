@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('calendar')
-<div class="container mx-auto h-[90vh]  flex items-center justify-center">
-    <div id='calendar' class="w-full h-full"></div>
+<div class="container mx-auto h-[90vh] flex items-center justify-center p-4">
+    <div id='calendar' class="w-full h-full rounded-xl shadow-lg border "></div>
 </div>
 
 <!-- Modal -->

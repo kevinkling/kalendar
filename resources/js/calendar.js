@@ -26,7 +26,26 @@ document.addEventListener("DOMContentLoaded", function () {
         headerToolbar: {
             left: "prev,next today",
             center: "title",
-            right: "dayGridMonth",
+            right: "dayGridMonth,listWeek",
+        },
+        views: {
+            listWeek: {
+                duration: { weeks: 2 },
+            },
+            dayGridMonth: {
+                titleFormat: {
+                    year: "numeric",
+                    month: "long",
+                },
+            },
+        },
+        // Cambiar el texto de los botones del headerToolbar
+        buttonText: {
+            today: "Hoy",
+            month: "Mes",
+            week: "Semana",
+            day: "Día",
+            list: "Semana",
         },
 
         eventSources: {
@@ -35,6 +54,22 @@ document.addEventListener("DOMContentLoaded", function () {
             extraParams: {
                 _token: formulario._token.value,
             },
+            failure: function () {
+                alert("Error al cargar los eventos");
+            },
+        },
+        eventDidMount: function (arg) {
+            arg.el.classList.add(
+                "bg-blue-600",
+                "text-white",
+                "rounded-md",
+                "shadow-md",
+                "p-2",
+                "hover:bg-blue-700"
+            );
+            arg.el.style.border = "2px solid #1E40AF";
+            arg.el.style.fontSize = "15px";
+            arg.el.style.fontWeight = "bold";
         },
 
         dateClick: function (info) {
@@ -80,18 +115,13 @@ document.addEventListener("DOMContentLoaded", function () {
     document
         .getElementById("btnEliminar")
         .addEventListener("click", function () {
-            submitData(
-                "/borrar/" + formulario.id.value
-            );
+            submitData("/borrar/" + formulario.id.value);
         });
 
     document
         .getElementById("btnModificar")
         .addEventListener("click", function () {
-            submitData(
-                "/actualizar/" +
-                    formulario.id.value
-            );
+            submitData("/actualizar/" + formulario.id.value);
         });
 
     function submitData(url) {
