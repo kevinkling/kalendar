@@ -60,8 +60,8 @@ RUN apt-get update && apt-get install -y postgresql-client
 
 
 # RUN php artisan migrate --force
-RUN php artisan optimize:clear
-RUN php artisan config:cache
+# RUN php artisan optimize:clear
+# RUN php artisan config:cache
 
 # Exponemos el puerto 80
 EXPOSE 80
