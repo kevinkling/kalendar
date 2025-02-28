@@ -75,4 +75,4 @@ CMD ["apache2-foreground"]
 # Verificar los archivos generados por Vite en public/build
 RUN echo "📂 Verificando archivos en public/build:" && ls -l /var/www/html/public/build
 RUN echo "Vite manifest existe?" && ls -l /var/www/html/public/build/manifest.json
-RUN tail -f /var/log/apache2/error.log
+
