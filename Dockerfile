@@ -2,12 +2,12 @@
 FROM php:8.2-apache
 
 # Variables de entorno para conexión a la base de datos
-ENV DB_CONNECTION=pgsql
-ENV DB_HOST=dpg-cutqua5ds78s7392lra0-a.oregon-postgres.render.com
-ENV DB_PORT=5432
-ENV DB_DATABASE=kalendar_prod
-ENV DB_USERNAME=kalendar_prod_user
-ENV DB_PASSWORD=yQ7U6fdAXEnb21s22XmWjDYLGXpKG4v0
+# ENV DB_CONNECTION=pgsql
+# ENV DB_HOST=dpg-cutqua5ds78s7392lra0-a.oregon-postgres.render.com
+# ENV DB_PORT=5432
+# ENV DB_DATABASE=kalendar_prod
+# ENV DB_USERNAME=kalendar_prod_user
+# ENV DB_PASSWORD=yQ7U6fdAXEnb21s22XmWjDYLGXpKG4v0
 
 # Establecemos el directorio de trabajo dentro del contenedor
 WORKDIR /var/www/html
@@ -36,17 +36,10 @@ COPY . .
 # Instalamos las dependencias de Composer
 RUN composer install --no-dev --optimize-autoloader
 
-RUN export NODE_ENV=production
-# Instalamos las dependencias de frontend con pnpm
+# RUN export NODE_ENV=production
 RUN pnpm install && pnpm run build
-RUN echo "📦 Ejecutando build con Vite..."
 RUN pnpm run build
 RUN mv /var/www/html/public/build/.vite/manifest.json /var/www/html/public/build/manifest.json
-
-
-RUN echo "📂 Verificando archivos en public/build:" && ls -la /var/www/html/public/build
-RUN if [ -f /var/www/html/public/build/manifest.json ]; then echo "✅ Vite manifest encontrado"; else echo "❌ Vite manifest NO encontrado" && exit 1; fi
-
 
 
 # Habilitamos mod_rewrite para URLs amigables en Laravel
@@ -63,12 +56,9 @@ RUN chown -R www-data:www-data storage bootstrap/cache public
 RUN chmod -R 775 storage bootstrap/cache public
 
 # Verificar la conexión a la base de datos PostgreSQL desde el Dockerfile
-RUN apt-get update && apt-get install -y postgresql-client && \
-    pg_isready -h ${DB_HOST} -U ${DB_USERNAME} -d ${DB_DATABASE} && \
-    echo "Conexión exitosa a la base de datos PostgreSQL" || echo "Conexión fallida a la base de datos PostgreSQL"
+RUN apt-get update && apt-get install -y postgresql-client
 
 
-# Ejecutar migraciones antes de iniciar Apache
 # RUN php artisan migrate --force
 RUN php artisan optimize:clear
 RUN php artisan config:cache
@@ -79,18 +69,10 @@ EXPOSE 80
 # Iniciamos Apache
 CMD ["apache2-foreground"]
 
-# Verificación importante de Composer y PostgreSQL
-RUN echo "📦 Verificando dependencias de PHP y Composer:"
-# Verificar Composer
-RUN composer --version
 
-# Verificar las extensiones de PHP necesarias para PostgreSQL
-RUN php -m | grep -E 'pdo|pgsql'
 
-# Verificar el estado de las migraciones de Laravel
-RUN php artisan migrate:status
 
 # Verificar los archivos generados por Vite en public/build
 RUN echo "📂 Verificando archivos en public/build:" && ls -l /var/www/html/public/build
-
 RUN echo "Vite manifest existe?" && ls -l /var/www/html/public/build/manifest.json
+RUN tail -f /var/log/apache2/error.log
