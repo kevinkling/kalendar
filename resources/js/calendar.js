@@ -58,19 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 alert("Error al cargar los eventos");
             },
         },
-        eventDidMount: function (arg) {
-            arg.el.classList.add(
-                "bg-blue-600",
-                "text-white",
-                "rounded-md",
-                "shadow-md",
-                "p-2",
-                "hover:bg-blue-700"
-            );
-            arg.el.style.border = "2px solid #1E40AF";
-            arg.el.style.fontSize = "15px";
-            arg.el.style.fontWeight = "bold";
-        },
+    
 
         dateClick: function (info) {
             openModal();
