@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ActivityController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -9,20 +10,20 @@ Route::get('/', function () {
 })->middleware('auth');
 
 
-// Rutas del CRUD de eventos
+// Rutas del CRUD de actividades
 Route::get('/calendar', function () {
     return view('calendar');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::post('/calendar/agregar', [App\Http\Controllers\EventoController::class, 'store'])->middleware(['auth', 'verified'])->name('calendar.agregar');
+Route::post('/calendar/agregar', [App\Http\Controllers\ActivityController::class, 'store'])->middleware(['auth', 'verified'])->name('calendar.agregar');
 
-Route::post('/calendar/mostrar', [App\Http\Controllers\EventoController::class, 'show'])->middleware(['auth', 'verified'])->name('calendar.mostrar');
+Route::get('/calendar/mostrar', [App\Http\Controllers\ActivityController::class, 'show'])->middleware(['auth', 'verified'])->name('calendar.mostrar');
 
-Route::post('/calendar/editar/{id}', [App\Http\Controllers\EventoController::class, 'edit'])->middleware(['auth', 'verified'])->name('calendar.editar');
+Route::post('/calendar/editar/{id}', [App\Http\Controllers\ActivityController::class, 'edit'])->middleware(['auth', 'verified'])->name('calendar.editar');
 
-Route::post('/calendar/actualizar/{evento}', [App\Http\Controllers\EventoController::class, 'update'])->middleware(['auth', 'verified'])->name('calendar.actualizar');
+Route::post('/calendar/actualizar/{activity}', [App\Http\Controllers\ActivityController::class, 'update'])->middleware(['auth', 'verified'])->name('calendar.actualizar');
 
-Route::post('/calendar/borrar/{id}', [App\Http\Controllers\EventoController::class, 'destroy'])->middleware(['auth', 'verified'])->name('calendar.borrar');
+Route::post('/calendar/borrar/{id}', [App\Http\Controllers\ActivityController::class, 'destroy'])->middleware(['auth', 'verified'])->name('calendar.borrar');
 
 
 // Rutas del perfil de usuario

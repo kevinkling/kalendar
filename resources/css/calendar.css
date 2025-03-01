@@ -1,0 +1,37 @@
+/* ================= */
+/* Estilos Generales */
+/* ================= */
+
+/* Estilos del titulo */
+.fc-toolbar-title {
+    text-transform: capitalize;
+    font-weight: bold;
+}
+
+/* Estilos de los eventos */
+.fc-event {
+    font-size: 14px;
+    font-weight: normal;
+    background-color: #2563eb;
+    color: white;
+    border: 1px solid #1e40af;
+    border-radius: 0.375rem;
+    box-shadow: none;
+    padding: 0.25rem 0.5rem;
+    margin-bottom: 0.25rem;
+    transition: background-color 0.3s;
+}
+
+/* Estilo de hover para los eventos en las vistas de semana y mes */
+body .fc .fc-list-event:hover td,
+.fc-event:hover {
+    background-color: #1d4ed8;
+}
+
+/* ============================ */
+/* Estilos para la Vista de Mes */
+/* ============================ */
+
+/* =============================== */
+/* Estilos para la Vista de Semana */
+/* =============================== */

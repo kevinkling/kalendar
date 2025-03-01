@@ -24,4 +24,11 @@ kevin@gmail.com
 Pass: kevin1234
 
 
+# local:
+-instalar postgrade, agregar la carpeta bin al path
+- entrar a la linea de comando de sql y crear la base de datos kalendar
+- configurar .env
+php artisan key:generate
+
+
 https://www.youtube.com/watch?v=iyHt8Ew-l6U&t=144s&ab_channel=Develoteca-OscarUh
