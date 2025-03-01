@@ -13,17 +13,17 @@ Route::get('/', function () {
 // Rutas del CRUD de actividades
 Route::get('/calendar', function () {
     return view('calendar');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->name('dashboard'); //->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::post('/calendar/agregar', [App\Http\Controllers\ActivityController::class, 'store'])->middleware(['auth', 'verified'])->name('calendar.agregar');
+Route::post('/calendar/agregar', [App\Http\Controllers\ActivityController::class, 'store']); //->middleware(['auth', 'verified'])->name('calendar.agregar');
 
-Route::get('/calendar/mostrar', [App\Http\Controllers\ActivityController::class, 'show'])->middleware(['auth', 'verified'])->name('calendar.mostrar');
+Route::get('/calendar/mostrar', [App\Http\Controllers\ActivityController::class, 'show']); //->middleware(['auth', 'verified'])->name('calendar.mostrar');
 
-Route::post('/calendar/editar/{id}', [App\Http\Controllers\ActivityController::class, 'edit'])->middleware(['auth', 'verified'])->name('calendar.editar');
+Route::post('/calendar/editar/{id}', [App\Http\Controllers\ActivityController::class, 'edit']); //->middleware(['auth', 'verified'])->name('calendar.editar');
 
-Route::post('/calendar/actualizar/{activity}', [App\Http\Controllers\ActivityController::class, 'update'])->middleware(['auth', 'verified'])->name('calendar.actualizar');
+Route::post('/calendar/actualizar/{activity}', [App\Http\Controllers\ActivityController::class, 'update']); //->middleware(['auth', 'verified'])->name('calendar.actualizar');
 
-Route::post('/calendar/borrar/{id}', [App\Http\Controllers\ActivityController::class, 'destroy'])->middleware(['auth', 'verified'])->name('calendar.borrar');
+Route::post('/calendar/borrar/{id}', [App\Http\Controllers\ActivityController::class, 'destroy']); //->middleware(['auth', 'verified'])->name('calendar.borrar');
 
 
 // Rutas del perfil de usuario
