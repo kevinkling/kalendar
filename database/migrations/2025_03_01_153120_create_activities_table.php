@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('activity'); // Ej: Trabajo Practico, Examen
             $table->string('subject');  // Ej: Programación
-            $table->date('start_date'); // Fecha de inicio
-            $table->date('end_date'); // Fecha de fin
+            $table->dateTime('start_date'); // Fecha de inicio
+            $table->dateTime('end_date'); // Fecha de fin
             $table->text('notes')->nullable(); // Notas adicionales
             $table->timestamps();
         });

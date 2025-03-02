@@ -42,9 +42,8 @@ RUN echo "DirectoryIndex index.php" >> /etc/apache2/apache2.conf
 RUN chown -R www-data:www-data storage bootstrap/cache public && \
     chmod -R 775 storage bootstrap/cache public
 
-RUN php artisan migrate:reset
 RUN php artisan migrate --force
-
+RUN php artisan migrate:status
 
 # Exponemos el puerto 80
 EXPOSE 80
