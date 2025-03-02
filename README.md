@@ -1,34 +1,19 @@
-- Pasos qu ehice para instalar
-    - pnpm install
-    - cp .env.example .env (No lo hice porque ya lo tenia)
-    - php artisan key:generate
+# Proyecto Kalendar  📅
 
+**Kalendar** es una aplicación web que permite a los estudiantes gestionar sus actividades académicas de manera eficiente. El objetivo principal del proyecto es registrar y visualizar actividades como materias, exámenes, trabajos prácticos y otros eventos académicos, facilitando su seguimiento.
 
-- Uso:
-    - Breeze para login (blade, Pest:testin) https://www.youtube.com/watch?v=3hRkE64YIqg&ab_channel=ElRinc%C3%B3ndeIsma
-    - fullcalendar : pnpm add @fullcalendar/core @fullcalendar/daygrid @fullcalendar/interaction https://fullcalendar.io/
-    axios para los metoso post
+El sistema está diseñado para ser intuitivo, permitiendo a los usuarios agregar, editar y eliminar actividades. Además, integra un calendario interactivo con FullCalendar para ver los eventos de manera visual.
 
+---
 
-- Para un futuro :
-    - Usar el verificador de email (MustVerifyEmail)
-    - Planitllas (PHP)
+## Disclaimer ⚠️
 
+Este proyecto **Kalendar** está aún en desarrollo, por lo que pueden encontrarse errores o inconsistencias. Algunas funcionalidades aún no están completas.
 
-- Cosas que hice :
-    - instale breeze
-    - instale fullcalendar, personalice su estilo y separe en archivos algunas cosas
-    
+### Cosas por hacer 🔧:
+- Implementar el **modo responsivo** para una mejor experiencia en dispositivos móviles.
+- Implementar **modo oscuro** para mejorar la accesibilidad en entornos con poca luz.
+- Hacer el proyecto más **accesible** para personas con discapacidades.
+- Implementar el **verificador de email** usando `MustVerifyEmail` de Laravel.
+- **Evitar la deformación de los eventos** en el calendario. Una posible solución podría ser agregar un **scroll dentro del mes** para que los eventos no se sobrepongan o deformen en vista mensual.
 
-kevin@gmail.com
-Pass: kevin1234
-
-
-# local:
--instalar postgrade, agregar la carpeta bin al path
-- entrar a la linea de comando de sql y crear la base de datos kalendar
-- configurar .env
-php artisan key:generate
-
-
-https://www.youtube.com/watch?v=iyHt8Ew-l6U&t=144s&ab_channel=Develoteca-OscarUh
