@@ -41,6 +41,13 @@
         <main>
             @yield('calendar') <!-- Esta línea se mantiene igual -->
         </main>
+
+        <div id="mobile-popup" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>Este sitio no es responsive. Considera usarlo en un dispositivo con pantalla más grande.</p>
+            </div>
+        </div>
     </div>
 </body>
 </html>

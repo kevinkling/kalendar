@@ -1,5 +1,6 @@
 // import './bootstrap';
 import './calendar';
+import './mobile-popup';
 
 import Alpine from 'alpinejs';
 import axios from 'axios';
