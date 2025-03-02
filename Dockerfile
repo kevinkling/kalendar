@@ -42,8 +42,10 @@ RUN echo "DirectoryIndex index.php" >> /etc/apache2/apache2.conf
 RUN chown -R www-data:www-data storage bootstrap/cache public && \
     chmod -R 775 storage bootstrap/cache public
 
+# Ejecutamos los comandos de Laravel para borrar las tablas y volver a ejecutar las migraciones
+RUN php artisan migrate:reset --force
 RUN php artisan migrate --force
-RUN php artisan migrate:status
+
 
 # Exponemos el puerto 80
 EXPOSE 80
